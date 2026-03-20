@@ -38,4 +38,15 @@ public class MyLinkedList {
 			lastNode = newNode;
 		}
 	}
+	public void print() throws Exception{
+		if(isEmpty()) {
+			throw(new Exception("Sarakstu nevar izveidot"));
+		}
+		MyNode currentNode = firstNode;
+		while(currentNode!=null) {
+			System.out.println(currentNode.getElement());
+			currentNode = currentNode.getNextNode();
+		}
+		System.out.println();
+	}
 }
