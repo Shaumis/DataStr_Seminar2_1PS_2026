@@ -55,7 +55,8 @@ public class MyLinkedList {
 			add(element);
 		} else {
 			MyNode currentNode = firstNode;
-			for (int i = 1; i <= position; i++);
+			for (int i = 1; i <= position; i++)
+				;
 			currentNode = currentNode.getNextNode();
 			MyNode previousNode = currentNode;
 			MyNode nextNode = currentNode.getNextNode();
@@ -79,20 +80,19 @@ public class MyLinkedList {
 		if (position > howManyElements) {
 			throw (new Exception("Nevar dzēst jaunu elementu, nav vietas!"));
 		}
-		if(position == 0) {
+		if (position == 0) {
 			MyNode newFirstNode = firstNode.getNextNode();
 			newFirstNode.setPreviousNode(null);
 			firstNode = newFirstNode;
 			howManyElements--;
-		}
-		else if(position == howManyElements-1) {
+		} else if (position == howManyElements - 1) {
 			MyNode newLastNode = lastNode.getPreviousNode();
 			newLastNode.setNextNode(null);
 			lastNode = newLastNode;
 			howManyElements--;
-		}else {
+		} else {
 			MyNode currentNode = firstNode;
-			for(int i = 1; i < position;i++) {
+			for (int i = 1; i < position; i++) {
 				currentNode = currentNode.getNextNode();
 			}
 			MyNode newLeftNode = currentNode;
@@ -101,6 +101,24 @@ public class MyLinkedList {
 			newRightNode.setPreviousNode(newLeftNode);
 			howManyElements--;
 		}
+	}
+	public char get(int position)throws Exception {
+		if (isEmpty()) {
+			throw (new Exception("Saraksts ir tukšs"));
+		}
+		if (position < 0) {
+			throw (new Exception("Nevar atrast elementu, jo index ir negatīvs"));
+		}
+
+		if (position > howManyElements) {
+			throw (new Exception("Nevar atrast jaunu elementu, nav vietas!"));
+		}
+		MyNode currentNode = firstNode;
+		for(int i = 1;i<position;i++) {
+			currentNode = currentNode.getNextNode();
+			
+		}
+		return currentNode.getElement();
 	}
 
 	public void print() throws Exception {
