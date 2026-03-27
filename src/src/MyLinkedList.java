@@ -46,26 +46,61 @@ public class MyLinkedList {
 		if (position > howManyElements) {
 			throw new Exception("Too Big");
 		}
-		if(position == 0) {
+		if (position == 0) {
 			MyNode newNode = new MyNode(element);
 			firstNode.setPreviousNode(newNode);
 			newNode.setNextNode(newNode);
 			howManyElements++;
-		}else if(position == howManyElements) {
+		} else if (position == howManyElements) {
 			add(element);
-		}else {
+		} else {
+			MyNode currentNode = firstNode;
+			for (int i = 1; i <= position; i++);
+			currentNode = currentNode.getNextNode();
+			MyNode previousNode = currentNode;
+			MyNode nextNode = currentNode.getNextNode();
+			MyNode newNode = new MyNode(element);
+			newNode.setPreviousNode(previousNode);
+			previousNode.setNextNode(newNode);
+			newNode.setNextNode(nextNode);
+			nextNode.setPreviousNode(newNode);
+			howManyElements++;
 		}
-		MyNode currentNode = firstNode;
-		for(int i = 1;i<=position ;i++);
-		currentNode = currentNode.getNextNode();
-		MyNode previousNode = currentNode;
-		MyNode nextNode = currentNode.getNextNode();
-		MyNode newNode= new MyNode(element);
-		newNode.setPreviousNode(previousNode);
-		previousNode.setNextNode(newNode);
-		newNode.setNextNode(nextNode);
-		nextNode.setPreviousNode(newNode);
-		howManyElements++;
+	}
+
+	public void remove(int position) throws Exception {
+		if (isEmpty()) {
+			throw (new Exception("Saraksts ir tukšs"));
+		}
+		if (position < 0) {
+			throw (new Exception("Nevar dzēst elementu, jo index ir negatīvs"));
+		}
+
+		if (position > howManyElements) {
+			throw (new Exception("Nevar dzēst jaunu elementu, nav vietas!"));
+		}
+		if(position == 0) {
+			MyNode newFirstNode = firstNode.getNextNode();
+			newFirstNode.setPreviousNode(null);
+			firstNode = newFirstNode;
+			howManyElements--;
+		}
+		else if(position == howManyElements-1) {
+			MyNode newLastNode = lastNode.getPreviousNode();
+			newLastNode.setNextNode(null);
+			lastNode = newLastNode;
+			howManyElements--;
+		}else {
+			MyNode currentNode = firstNode;
+			for(int i = 1; i < position;i++) {
+				currentNode = currentNode.getNextNode();
+			}
+			MyNode newLeftNode = currentNode;
+			MyNode newRightNode = currentNode.getNextNode().getNextNode();
+			newLeftNode.setNextNode(newRightNode);
+			newRightNode.setPreviousNode(newLeftNode);
+			howManyElements--;
+		}
 	}
 
 	public void print() throws Exception {
