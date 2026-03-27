@@ -11,6 +11,9 @@ public class MainService {
 		symbols.add('l');
 		symbols.add('a');
 		symbols.add('d');
+		symbols.print();
+		symbols.add('Z',0);
+		symbols.print();
 	}
 	catch (Exception e) {
 		System.out.println(e.getMessage());
